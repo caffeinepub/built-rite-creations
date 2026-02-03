@@ -1,12 +1,10 @@
 # Specification
 
 ## Summary
-**Goal:** Recreate the public marketing website content and structure from https://precisionlasernw.com as a new site branded “Built Rite Creations”.
+**Goal:** Update the website to use the correct business phone number everywhere.
 
 **Planned changes:**
-- Rebuild all public pages/sections to match the source site’s page structure, navigation, footer links, and written content, replacing the company name everywhere with “Built Rite Creations”.
-- Implement responsive, accessible layouts for mobile/tablet/desktop with working navigation and no broken links.
-- Add sensible SEO defaults: per-page document titles and a global meta description.
-- Apply a cohesive industrial/craftsmanship visual theme (colors, typography, spacing, component styling) consistently across the site.
+- Update the centralized business phone constants to set the display number to “(781) 227-0994” and the `tel:` digits to “7812270994”.
+- Verify and remove any remaining references to “(844) 527-3733” in frontend source and rendered UI phone links/text.
 
-**User-visible outcome:** Visitors can browse a fully functional, responsive “Built Rite Creations” marketing website that mirrors the source site’s content/sections, with updated branding and working navigation plus basic SEO titles/description.
+**User-visible outcome:** All phone numbers shown on the site (and all tap-to-call links) use “(781) 227-0994” with `tel:7812270994`, and the old number no longer appears.

@@ -1,66 +1,34 @@
 {
   "kind": "build_request",
-  "title": "Recreate precisionlasernw.com content as a new site branded \"Built Rite Creations\"",
+  "title": "Replace incorrect phone number site-wide",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Recreate a public marketing website whose page structure, sections, and written content match the current content found on https://precisionlasernw.com, but with the company name changed everywhere to \"Built Rite Creations\".",
+      "text": "Replace the incorrect phone number \"(844) 527-3733\" with \"(781) 227-0994\" across the entire website by updating the centralized business phone constants (including both the displayed format and the tel: digits), and ensure no remaining UI text or links still reference the old number.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-1"
+          "msg-5"
         ],
         "quotes": [
-          "I want to create a website with the same content as precisionlasernw.com but change the company name to Built Rite Creations."
+          "Phone number is still wrong. Please replace \"(844) 527-3733\" with \"(781) 227-0994\"."
         ]
       },
       "acceptanceCriteria": [
-        "All user-visible pages/sections present on https://precisionlasernw.com are represented in the new app (including navigation and footer links).",
-        "All occurrences of the original company name on the recreated pages are replaced with \"Built Rite Creations\" (including headings, paragraphs, meta title/description, footer copyright, and any call-to-action text).",
-        "All user-facing text is in English."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Implement the recreated site as a responsive, accessible UI (mobile/tablet/desktop) with working navigation between pages/sections and sensible SEO defaults (document titles per page and a global meta description).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Navigation elements route correctly to their corresponding pages/sections without broken links.",
-        "Layout remains readable and usable on mobile and desktop screen sizes.",
-        "Each route/page has a non-empty document title and the app includes a meta description."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Apply a cohesive visual theme (colors, typography, spacing, and component styling) that fits a construction/woodworking/industrial craftsmanship brand for \"Built Rite Creations\" and use it consistently across the entire site (avoid default-looking template styling).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-1"
-        ]
-      },
-      "acceptanceCriteria": [
-        "Theme is consistent across header, footer, and all sections (typography scale, button styles, and spacing feel unified).",
-        "Color palette and typography clearly communicate an industrial/craft brand aesthetic (not a generic default template look)."
+        "In frontend/src/content/businessInfo.ts, businessInfo.phone.display is \"(781) 227-0994\" and businessInfo.phone.tel is \"7812270994\".",
+        "All rendered phone links (e.g., footer and contact page) display \"(781) 227-0994\" and use href=\"tel:7812270994\".",
+        "The string \"(844) 527-3733\" does not appear anywhere in the frontend source or rendered pages."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/immutablePaths (compose existing UI components instead).",
-    "Backend must remain a single Motoko actor in backend/main.mo; only add backend functionality if it is required for the requested marketing site.",
-    "Do not include third-party auth providers; only Internet Identity is supported if authentication is later needed."
+    "Do not edit files under frontend/src/components/ui (shadcn/ui components are read-only).",
+    "Backend is not required for this change."
   ],
   "nonGoals": [
-    "Building an admin/CMS for editing site content.",
-    "E-commerce, payments, checkout, or customer accounts.",
-    "Real-time chat or messaging features.",
-    "Integrations with external databases or third-party backends."
+    "Updating email address, service area, hours, or social links.",
+    "Changing the contact form behavior beyond reflecting the correct phone number in the UI."
   ],
   "imageRequirements": {
     "required": [],

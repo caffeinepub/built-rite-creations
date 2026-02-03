@@ -2,19 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-recreate-a-public-marketing-website-whose-page-structure-sections-and-written-content-match-the-current-content-found-on-https-precisionlasernw-com-but-with-the-company-name-changed-everywhere-to-built-rite-creations",
-      "featureTitle": "Recreate a public marketing website whose page structure, sections, and written content match the current content found on https://precisionlasernw.com, but with the company name changed everywhere to \"Built Rite Creations\".",
+      "featureId": "feature-replace-the-incorrect-phone-number-844-527-3733-with-781-227-0994-across-the-entire-website-by-updating-the-centralized-business-phone-constants-including-both-the-displayed-format-and-the-tel-digits-and-ensure-no-remaining-ui-text-or-links-still-reference-the-old-number",
+      "featureTitle": "Replace the incorrect phone number \"(844) 527-3733\" with \"(781) 227-0994\" across the entire website by updating the centralized business phone constants (including both the displayed format and the tel: digits), and ensure no remaining UI text or links still reference the old number.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/SiteFooter.tsx",
-        "frontend/src/components/SiteHeader.tsx",
-        "frontend/src/components/SiteLayout.tsx",
-        "frontend/src/main.tsx",
-        "frontend/src/pages/AboutPage.tsx",
-        "frontend/src/pages/ContactPage.tsx",
-        "frontend/src/pages/GalleryPage.tsx",
-        "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/ServicesPage.tsx"
+        "frontend/src/content/businessInfo.ts"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -25,55 +16,6 @@
       ],
       "testIds": [
         "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-the-recreated-site-as-a-responsive-accessible-ui-mobile-tablet-desktop-with-working-navigation-between-pages-sections-and-sensible-seo-defaults-document-titles-per-page-and-a-global-meta-description",
-      "featureTitle": "Implement the recreated site as a responsive, accessible UI (mobile/tablet/desktop) with working navigation between pages/sections and sensible SEO defaults (document titles per page and a global meta description).",
-      "files": [
-        "frontend/index.html",
-        "frontend/src/App.tsx",
-        "frontend/src/components/SiteHeader.tsx",
-        "frontend/src/hooks/useDocumentTitle.ts",
-        "frontend/src/index.css",
-        "frontend/src/pages/AboutPage.tsx",
-        "frontend/src/pages/ContactPage.tsx",
-        "frontend/src/pages/GalleryPage.tsx",
-        "frontend/src/pages/HomePage.tsx",
-        "frontend/src/pages/ServicesPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-apply-a-cohesive-visual-theme-colors-typography-spacing-and-component-styling-that-fits-a-construction-woodworking-industrial-craftsmanship-brand-for-built-rite-creations-and-use-it-consistently-across-the-entire-site-avoid-default-looking-template-styling",
-      "featureTitle": "Apply a cohesive visual theme (colors, typography, spacing, and component styling) that fits a construction/woodworking/industrial craftsmanship brand for \"Built Rite Creations\" and use it consistently across the entire site (avoid default-looking template styling).",
-      "files": [
-        "frontend/src/components/SiteFooter.tsx",
-        "frontend/src/components/SiteHeader.tsx",
-        "frontend/src/components/SiteLayout.tsx",
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
       ],
       "confidence": "high"
     }

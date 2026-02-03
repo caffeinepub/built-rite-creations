@@ -1,29 +1,282 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Create a website mirroring the content of precisionlasernw.com, rebranded under the company name \"Built Rite Creations\".",
+  "summary": "Built Rite Creations is a Vite + React + Tailwind single-page marketing website for a laser-cleaning services company. It uses TanStack Router with hash-based history to work on traditional static hosting without server-side rewrite rules. The site provides static content pages (Home, Services, Gallery, About, Contact) built with shadcn/ui components and a token-based Tailwind theme. The Contact page contains a client-side validated quote request form that generates a prefilled mailto: link (static-host-friendly) for users to send via their own email client. The repository also includes Internet Computer scaffolding (Internet Identity auth context, identity-aware actor creation hook, and an empty Motoko canister) for potential future backend integration, though the current site operates as a static frontend.",
   "existing_features": [
     {
-      "id": "feature-recreate-a-public-marketing-website-whose-page-structure-sections-and-written-content-match-the-current-content-found-on-https-precisionlasernw-com-but-with-the-company-name-changed-everywhere-to-built-rite-creations",
-      "title": "Recreate a public marketing website whose page structure, sections, and written content match the current content found on https://precisionlasernw.com, but with the company name changed everywhere to \"Built Rite Creations\".",
+      "id": "IF-1",
+      "title": "Static marketing SPA for Built Rite Creations",
+      "synonyms": [
+        "brochure site",
+        "marketing website"
+      ],
+      "description": "Implements a static, responsive marketing website for a laser cleaning services business with hard-coded content sections and calls-to-action.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-2",
+      "title": "Client-side routing with TanStack Router",
+      "synonyms": [
+        "SPA routes",
+        "TanStack Router navigation"
+      ],
+      "description": "Defines routes for Home (/), Services (/services), Gallery (/gallery), About (/about), and Contact (/contact), all rendered under a shared root layout.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-3",
+      "title": "Hash-based routing for static-host compatibility",
+      "synonyms": [
+        "hash history",
+        "static hosting routing"
+      ],
+      "description": "Uses createHashHistory so refreshes and direct links work on traditional static hosts without rewrite rules (URLs like /#/services).",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-4",
+      "title": "Shared site layout (header + outlet + footer)",
+      "synonyms": [
+        "SiteLayout",
+        "root layout"
+      ],
+      "description": "Provides a consistent frame across all routes by composing SiteHeader, a routed main content outlet, and SiteFooter in a full-height flex layout.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-5",
+      "title": "Responsive navigation header with mobile sheet menu",
+      "synonyms": [
+        "SiteHeader",
+        "mobile drawer navigation"
+      ],
+      "description": "Sticky header with branding, active-link styling via current location, desktop nav links, a mobile Sheet menu, and a prominent “Get a Quote” CTA linking to Contact.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-6",
+      "title": "Footer with contact info, quick links, and social links",
+      "synonyms": [
+        "SiteFooter"
+      ],
+      "description": "Displays phone/email/hours, service links, quick navigation links, social icons, and an attribution line; values are sourced from centralized businessInfo.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-7",
+      "title": "Home page marketing content and CTAs",
+      "synonyms": [
+        "landing page"
+      ],
+      "description": "Home page includes hero messaging, mission section, benefit/feature cards, services preview grid, and CTAs to Services and Contact.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-8",
+      "title": "Services page static service catalog",
+      "synonyms": [
+        "services listing",
+        "service grid"
+      ],
+      "description": "Renders a static catalog of laser cleaning services in a responsive card grid, plus CTA sections linking to the Contact page.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-9",
+      "title": "Gallery page with portfolio placeholders and CTA",
+      "synonyms": [
+        "project gallery"
+      ],
+      "description": "Shows a responsive grid of gallery cards (title/category) with placeholder media blocks and a CTA linking to Contact for quote requests.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-10",
+      "title": "About page with mission, values, and positioning content",
+      "synonyms": [
+        "company about page"
+      ],
+      "description": "Presents company mission, value cards, “Why Choose Us” content, and a CTA to Contact.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-11",
+      "title": "Contact page with validated quote request form",
+      "synonyms": [
+        "contact form",
+        "quote request"
+      ],
+      "description": "Implements a controlled form (name/email/phone/message) with client-side validation, per-field error messaging, and reset behavior after a successful submission step.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-12",
+      "title": "Static-host-friendly contact submission via mailto success flow",
+      "synonyms": [
+        "mailto submission",
+        "email client handoff"
+      ],
+      "description": "After successful validation, the Contact page shows a success state and provides a button that opens a prefilled mailto: link for the visitor to send using their email client, with an option to start another message.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-13",
+      "title": "Mailto link builder utility for contact form data",
+      "synonyms": [
+        "buildContactMailto"
+      ],
+      "description": "Encodes subject/body fields from contact form data into a properly URL-encoded mailto link targeting david@builtritesign.com.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-14",
+      "title": "Centralized business metadata constants",
+      "synonyms": [
+        "businessInfo",
+        "single source of truth"
+      ],
+      "description": "Provides a shared module for business name, phone/tel, email, hours, service area (\"Greater Boston Area (New England)\"), and social links; reused by the Contact page and footer.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-15",
+      "title": "Per-page document title management",
+      "synonyms": [
+        "useDocumentTitle",
+        "SEO title updates"
+      ],
+      "description": "Custom hook updates document.title per page with a “| Built Rite Creations” suffix and restores the previous title on unmount.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-16",
+      "title": "Tailwind theming with OKLCH CSS variables and dark mode",
+      "synonyms": [
+        "design tokens",
+        "light/dark theme"
+      ],
+      "description": "Defines semantic color tokens as CSS variables (OKLCH) and maps them through Tailwind configuration; supports dark mode via a 'dark' class.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-17",
+      "title": "Work Sans font integration",
+      "synonyms": [
+        "Google Fonts integration",
+        "typography"
+      ],
+      "description": "Loads Work Sans via Google Fonts in index.html and configures Tailwind to use it as the primary sans-serif font.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-18",
+      "title": "shadcn/ui component library integration",
+      "synonyms": [
+        "UI primitives",
+        "shadcn components"
+      ],
+      "description": "Uses shadcn/ui-styled components (e.g., Card, Button, Input, Textarea, Sheet, Alert) for consistent UI patterns and styling.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-19",
+      "title": "React Query provider setup",
+      "synonyms": [
+        "TanStack React Query",
+        "QueryClientProvider"
+      ],
+      "description": "Creates and provides a QueryClient at the application root to support cached async data and IC actor hooks.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-20",
+      "title": "Internet Identity authentication context",
+      "synonyms": [
+        "InternetIdentityProvider",
+        "Dfinity AuthClient integration"
+      ],
+      "description": "Provides a React context to initialize AuthClient, restore a stored identity, and expose login/logout methods and detailed status flags.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-21",
+      "title": "Backend actor creation hook with identity-aware caching",
+      "synonyms": [
+        "useActor",
+        "authenticated/anonymous actor"
+      ],
+      "description": "Creates an authenticated or anonymous Internet Computer actor via createActorWithConfig, caches it with React Query keyed by principal, and invalidates/refetches other queries when actor changes.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-22",
+      "title": "Static hosting build output via Vite",
+      "synonyms": [
+        "static dist build",
+        "relative base path build"
+      ],
+      "description": "Vite is configured to emit a static build into frontend/dist with base './' and an assets directory suitable for uploading to shared hosting environments.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-23",
+      "title": "Traditional hosting deployment guide",
+      "synonyms": [
+        "cPanel upload instructions",
+        "static hosting guide"
+      ],
+      "description": "Documentation explains how to build the frontend and upload the dist contents to traditional hosting providers, including hash-routing notes and troubleshooting.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-24",
+      "title": "Internet Computer backend scaffold (Motoko canister)",
+      "synonyms": [
+        "Motoko backend",
+        "IC canister scaffold"
+      ],
+      "description": "Includes an empty Motoko actor (backend/main.mo) as a placeholder for future backend APIs.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-25",
+      "title": "Placeholder queries module for future backend integration",
+      "synonyms": [
+        "useQueries placeholder"
+      ],
+      "description": "Provides a reserved module for React Query hooks; currently exports nothing because the site is static and does not query a backend.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-incorrect-phone-number-844-527-3733-with-781-227-0994-across-the-entire-website-by-updating-the-centralized-business-phone-constants-including-both-the-displayed-format-and-the-tel-digits-and-ensure-no-remaining-ui-text-or-links-still-reference-the-old-number",
+      "title": "Replace the incorrect phone number \"(844) 527-3733\" with \"(781) 227-0994\" across the entire website by updating the centralized business phone constants (including both the displayed format and the tel: digits), and ensure no remaining UI text or links still reference the old number.",
       "reqIds": [
         "REQ-1"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-implement-the-recreated-site-as-a-responsive-accessible-ui-mobile-tablet-desktop-with-working-navigation-between-pages-sections-and-sensible-seo-defaults-document-titles-per-page-and-a-global-meta-description",
-      "title": "Implement the recreated site as a responsive, accessible UI (mobile/tablet/desktop) with working navigation between pages/sections and sensible SEO defaults (document titles per page and a global meta description).",
-      "reqIds": [
-        "REQ-2"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-apply-a-cohesive-visual-theme-colors-typography-spacing-and-component-styling-that-fits-a-construction-woodworking-industrial-craftsmanship-brand-for-built-rite-creations-and-use-it-consistently-across-the-entire-site-avoid-default-looking-template-styling",
-      "title": "Apply a cohesive visual theme (colors, typography, spacing, and component styling) that fits a construction/woodworking/industrial craftsmanship brand for \"Built Rite Creations\" and use it consistently across the entire site (avoid default-looking template styling).",
-      "reqIds": [
-        "REQ-3"
       ],
       "version": 1
     }
@@ -31,18 +284,36 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Build a website with the same content as precisionlasernw.com, changing the company name to Built Rite Creations",
+      "summary": "Replace incorrect phone number (844) 527-3733 with (781) 227-0994 across the site (especially Contact page / quote flow)",
       "reqIds": [],
-      "status": "pending"
+      "status": "in_progress"
     }
   ],
-  "architecturalNotes": [],
-  "knownIssues": [],
-  "isFixRequest": false,
+  "architectural_notes": [
+    "Frontend is a Vite-powered React SPA with client-side routing via TanStack Router and a shared layout (SiteLayout) using <Outlet /> for nested route rendering.",
+    "Routing uses hash history (createHashHistory) so refresh/direct links work on static hosts without rewrite rules (URLs like /#/services).",
+    "UI is composed with shadcn/ui primitives (Button, Card, Input, Textarea, Sheet, Alert) plus Tailwind utility classes and lucide/react-icons iconography.",
+    "Design system is tokenized via CSS variables (OKLCH values) mapped into Tailwind theme colors; dark mode is supported via the 'class' strategy.",
+    "Per-page document title is handled by a custom hook (useDocumentTitle) that appends “| Built Rite Creations” and restores the prior title on unmount.",
+    "App root mounts global providers for TanStack React Query (QueryClientProvider) and Internet Identity (InternetIdentityProvider), enabling future authenticated backend calls even though current pages are static.",
+    "Internet Computer integration is abstracted behind hooks: useInternetIdentity manages auth state and persistence; useActor creates/caches an authenticated or anonymous actor and invalidates dependent React Query caches when identity changes.",
+    "Build output is configured for static hosting (Vite base './', dist output, assets folder).",
+    "Contact/quote submission avoids backend dependencies by preparing a URL-encoded mailto link and presenting a success state UI after validation.",
+    "Business contact details are centralized in a single businessInfo module and reused across pages/components."
+  ],
+  "known_issues": [
+    "Gallery page uses placeholder media blocks (“Project Image”) rather than real portfolio images/assets.",
+    "Social links are generic platform URLs (facebook.com/instagram.com/youtube.com) rather than company-specific profiles.",
+    "Two global CSS files exist (frontend/index.css and frontend/src/index.css) with different token sets; only src/index.css is imported in main.tsx, so the extra file can cause confusion or accidental divergence.",
+    "TRADITIONAL_HOSTING_GUIDE.md ends with an incomplete “Local Testing (Optional)” section.",
+    "Contact form submission relies on the visitor having a configured email client that can handle mailto links; this may not work well on some devices/browsers.",
+    "useInternetIdentity.ts references process.env.II_URL for the identity provider; in Vite, environment variables are typically read via import.meta.env, so configuration may be fragile depending on build tooling.",
+    "Motoko backend canister (backend/main.mo) is an empty actor with no methods; no functional backend APIs are implemented.",
+    "Site still displays incorrect phone number \"(844) 527-3733\" in at least one location; needs replacement with \"(781) 227-0994\" everywhere."
+  ],
+  "isFixRequest": true,
   "gameProjectType": "none",
   "projectName": "Built Rite Creations",
   "clarification_mode": "instant",
-  "clarification_rounds": 0,
-  "requiresBackendChanges": false,
-  "requiresFrontendChanges": true
+  "clarification_rounds": 0
 }

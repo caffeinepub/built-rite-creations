@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Phone, Mail, Clock, Heart } from 'lucide-react';
 import { SiFacebook, SiInstagram, SiYoutube } from 'react-icons/si';
+import { businessInfo } from '../content/businessInfo';
 
 export function SiteFooter() {
   return (
@@ -13,21 +14,21 @@ export function SiteFooter() {
             <div className="space-y-3 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <a href="tel:8445273733" className="hover:text-primary transition-colors">
-                  (844) 527-3733
+                <a href={`tel:${businessInfo.phone.tel}`} className="hover:text-primary transition-colors">
+                  {businessInfo.phone.display}
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:hello@builtritecreations.com" className="hover:text-primary transition-colors">
-                  hello@builtritecreations.com
+                <a href={`mailto:${businessInfo.email}`} className="hover:text-primary transition-colors">
+                  {businessInfo.email}
                 </a>
               </div>
               <div className="flex items-start gap-2">
                 <Clock className="h-4 w-4 mt-0.5" />
                 <div>
-                  <div>Monday—Friday</div>
-                  <div>8am — 5pm</div>
+                  <div>{businessInfo.hours.days}</div>
+                  <div>{businessInfo.hours.time}</div>
                 </div>
               </div>
             </div>
@@ -107,7 +108,7 @@ export function SiteFooter() {
             <h3 className="font-bold text-lg mb-4">Follow Us</h3>
             <div className="flex gap-4">
               <a
-                href="https://facebook.com"
+                href={businessInfo.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -116,7 +117,7 @@ export function SiteFooter() {
                 <span className="sr-only">Facebook</span>
               </a>
               <a
-                href="https://instagram.com"
+                href={businessInfo.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -125,7 +126,7 @@ export function SiteFooter() {
                 <span className="sr-only">Instagram</span>
               </a>
               <a
-                href="https://youtube.com"
+                href={businessInfo.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"

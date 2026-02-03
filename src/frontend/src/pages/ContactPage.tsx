@@ -4,30 +4,94 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Phone, Mail, Clock, MapPin } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Phone, Mail, Clock, MapPin, CheckCircle2, Send } from 'lucide-react';
 import { SiFacebook, SiInstagram, SiYoutube } from 'react-icons/si';
 import { useState } from 'react';
+import { buildContactMailto } from './contactMailto';
+import { businessInfo } from '../content/businessInfo';
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 export function ContactPage() {
   useDocumentTitle('Contact');
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     message: '',
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [lastSubmitted, setLastSubmitted] = useState<FormData | null>(null);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+
+  const validateForm = (): boolean => {
+    const newErrors: Partial<Record<keyof FormData, string>> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission would be handled here
-    console.log('Form submitted:', formData);
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    // Save the submitted data for the success state
+    setLastSubmitted({ ...formData });
+    setIsSubmitted(true);
+
+    // Reset the form
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    });
+    setErrors({});
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+    
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof FormData]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name as keyof FormData];
+        return newErrors;
+      });
+    }
+  };
+
+  const handleNewMessage = () => {
+    setIsSubmitted(false);
+    setLastSubmitted(null);
   };
 
   return (
@@ -58,61 +122,133 @@ export function ContactPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your name"
-                        required
-                      />
-                    </div>
+                  {isSubmitted && lastSubmitted ? (
+                    <div className="space-y-6">
+                      <Alert className="border-primary/50 bg-primary/5">
+                        <CheckCircle2 className="h-5 w-5 text-primary" />
+                        <AlertTitle className="text-lg font-semibold">Message Ready!</AlertTitle>
+                        <AlertDescription className="mt-2 space-y-2">
+                          <p>
+                            Your quote request has been prepared. Click the button below to send it via your email client.
+                          </p>
+                        </AlertDescription>
+                      </Alert>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="your.email@example.com"
-                        required
-                      />
-                    </div>
+                      <div className="space-y-3">
+                        <Button
+                          asChild
+                          size="lg"
+                          className="w-full"
+                        >
+                          <a href={buildContactMailto(lastSubmitted)}>
+                            <Send className="mr-2 h-5 w-5" />
+                            Send Email Now
+                          </a>
+                        </Button>
+                        
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="w-full"
+                          onClick={handleNewMessage}
+                        >
+                          Send Another Message
+                        </Button>
+                      </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="(555) 123-4567"
-                      />
+                      <div className="pt-4 border-t space-y-2">
+                        <p className="text-sm font-medium">Or contact us directly:</p>
+                        <div className="space-y-1 text-sm text-muted-foreground">
+                          <p>
+                            <span className="font-medium">Phone:</span>{' '}
+                            <a href={`tel:${businessInfo.phone.tel}`} className="hover:text-primary transition-colors">
+                              {businessInfo.phone.display}
+                            </a>
+                          </p>
+                          <p>
+                            <span className="font-medium">Email:</span>{' '}
+                            <a
+                              href={`mailto:${businessInfo.email}`}
+                              className="hover:text-primary transition-colors"
+                            >
+                              {businessInfo.email}
+                            </a>
+                          </p>
+                        </div>
+                      </div>
                     </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">
+                          Name <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Your name"
+                          className={errors.name ? 'border-destructive' : ''}
+                        />
+                        {errors.name && (
+                          <p className="text-sm text-destructive">{errors.name}</p>
+                        )}
+                      </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your project..."
-                        rows={5}
-                        required
-                      />
-                    </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">
+                          Email <span className="text-destructive">*</span>
+                        </Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="your.email@example.com"
+                          className={errors.email ? 'border-destructive' : ''}
+                        />
+                        {errors.email && (
+                          <p className="text-sm text-destructive">{errors.email}</p>
+                        )}
+                      </div>
 
-                    <Button type="submit" className="w-full" size="lg">
-                      Send Message
-                    </Button>
-                  </form>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder="(555) 123-4567"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <Label htmlFor="message">
+                          Message <span className="text-destructive">*</span>
+                        </Label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Tell us about your project..."
+                          rows={5}
+                          className={errors.message ? 'border-destructive' : ''}
+                        />
+                        {errors.message && (
+                          <p className="text-sm text-destructive">{errors.message}</p>
+                        )}
+                      </div>
+
+                      <Button type="submit" className="w-full" size="lg">
+                        Send Message
+                      </Button>
+                    </form>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -131,8 +267,8 @@ export function ContactPage() {
                     <Phone className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <a href="tel:8445273733" className="text-muted-foreground hover:text-primary transition-colors">
-                        (844) 527-3733
+                      <a href={`tel:${businessInfo.phone.tel}`} className="text-muted-foreground hover:text-primary transition-colors">
+                        {businessInfo.phone.display}
                       </a>
                     </div>
                   </div>
@@ -142,10 +278,10 @@ export function ContactPage() {
                     <div>
                       <p className="font-medium">Email</p>
                       <a
-                        href="mailto:hello@builtritecreations.com"
+                        href={`mailto:${businessInfo.email}`}
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        hello@builtritecreations.com
+                        {businessInfo.email}
                       </a>
                     </div>
                   </div>
@@ -154,8 +290,8 @@ export function ContactPage() {
                     <Clock className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Business Hours</p>
-                      <p className="text-muted-foreground">Monday—Friday</p>
-                      <p className="text-muted-foreground">8am — 5pm</p>
+                      <p className="text-muted-foreground">{businessInfo.hours.days}</p>
+                      <p className="text-muted-foreground">{businessInfo.hours.time}</p>
                     </div>
                   </div>
 
@@ -163,7 +299,7 @@ export function ContactPage() {
                     <MapPin className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Service Area</p>
-                      <p className="text-muted-foreground">Pacific Northwest & Beyond</p>
+                      <p className="text-muted-foreground">{businessInfo.serviceArea}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -177,7 +313,7 @@ export function ContactPage() {
                 <CardContent>
                   <div className="flex gap-4">
                     <a
-                      href="https://facebook.com"
+                      href={businessInfo.social.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center w-12 h-12 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -186,7 +322,7 @@ export function ContactPage() {
                       <span className="sr-only">Facebook</span>
                     </a>
                     <a
-                      href="https://instagram.com"
+                      href={businessInfo.social.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center w-12 h-12 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -195,7 +331,7 @@ export function ContactPage() {
                       <span className="sr-only">Instagram</span>
                     </a>
                     <a
-                      href="https://youtube.com"
+                      href={businessInfo.social.youtube}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center w-12 h-12 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-colors"

@@ -1,192 +1,31 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Built Rite Creations marketing site (precisionlasernw.com content recreation)",
+  "title": "Replace incorrect phone number site-wide",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Recreate precisionlasernw.com public marketing pages/sections and written content with all company-name references changed to “Built Rite Creations”.",
+      "summary": "Update centralized business phone constants and ensure all UI phone text/links use the new number with correct display and tel digits, with no remaining references to the old number.",
       "acceptanceCriteria": [
-        "All user-visible pages/sections present on https://precisionlasernw.com are represented in the new app (including navigation and footer links).",
-        "All occurrences of the original company name on the recreated pages are replaced with \"Built Rite Creations\" (including headings, paragraphs, meta title/description, footer copyright, and any call-to-action text).",
-        "All user-facing text is in English."
+        "In frontend/src/content/businessInfo.ts, businessInfo.phone.display is \"(781) 227-0994\" and businessInfo.phone.tel is \"7812270994\".",
+        "All rendered phone links (e.g., footer and contact page) display \"(781) 227-0994\" and use href=\"tel:7812270994\".",
+        "The string \"(844) 527-3733\" does not appear anywhere in the frontend source or rendered pages."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/content/siteContent.ts",
-          "operation": "create",
-          "description": "Create a single source-of-truth content model that mirrors the page structure, section ordering, and written copy from precisionlasernw.com, with all company-name strings replaced by “Built Rite Creations”."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "create",
-          "description": "Create the top-level app composition that renders the recreated marketing site pages/sections using the content from frontend/src/content/siteContent.ts and ensures all visible branding reads “Built Rite Creations”."
-        },
-        {
-          "path": "frontend/src/components/SiteLayout.tsx",
-          "operation": "create",
-          "description": "Create a shared marketing layout with a consistent header and footer; include navigation and footer links that reflect the same set of pages/sections available on precisionlasernw.com."
-        },
-        {
-          "path": "frontend/src/components/SiteHeader.tsx",
-          "operation": "create",
-          "description": "Implement the public header/navigation UI (including mobile navigation) matching the link set and hierarchy from precisionlasernw.com; use shadcn-ui components to support accessible navigation patterns (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/components/SiteFooter.tsx",
-          "operation": "create",
-          "description": "Implement the public footer UI with the same footer link structure as precisionlasernw.com; ensure copyright and any CTA/company references use “Built Rite Creations”."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "create",
-          "description": "Create the Home page that reproduces the same sections and copy order as the precisionlasernw.com home content using frontend/src/content/siteContent.ts."
-        },
-        {
-          "path": "frontend/src/pages/ServicesPage.tsx",
-          "operation": "create",
-          "description": "Create the Services (or equivalent) page to match precisionlasernw.com services-related sections and text using frontend/src/content/siteContent.ts."
-        },
-        {
-          "path": "frontend/src/pages/GalleryPage.tsx",
-          "operation": "create",
-          "description": "Create the Gallery/Portfolio (or equivalent) page structure to match precisionlasernw.com (text and section structure only; no new image requirements) using frontend/src/content/siteContent.ts."
-        },
-        {
-          "path": "frontend/src/pages/AboutPage.tsx",
-          "operation": "create",
-          "description": "Create the About (or equivalent) page to match precisionlasernw.com about/company sections and written content using frontend/src/content/siteContent.ts."
-        },
-        {
-          "path": "frontend/src/pages/ContactPage.tsx",
-          "operation": "create",
-          "description": "Create the Contact (or equivalent) page to match precisionlasernw.com contact sections and text using frontend/src/content/siteContent.ts; ensure all copy references “Built Rite Creations”."
-        },
-        {
-          "path": "frontend/src/components/sections/MarketingSectionRenderer.tsx",
-          "operation": "create",
-          "description": "Create a reusable section renderer to map the precisionlasernw.com-aligned content model into consistent section layouts across pages; use shadcn-ui components (e.g., card/button/accordion as appropriate) to standardize section presentation (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/components/sections/CallToAction.tsx",
-          "operation": "create",
-          "description": "Create a reusable CTA section component to render any CTAs present in the source site copy, ensuring all labels and text reference “Built Rite Creations”; use shadcn-ui button styling for consistent CTAs (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/main.tsx",
+          "path": "frontend/src/content/businessInfo.ts",
           "operation": "modify",
-          "description": "Wire the newly created frontend/src/App.tsx into the existing React entry so the recreated marketing site renders as the primary application UI."
-        }
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "summary": "Deliver a responsive, accessible UI with working navigation and sensible SEO defaults (per-page titles + global meta description).",
-      "acceptanceCriteria": [
-        "Navigation elements route correctly to their corresponding pages/sections without broken links.",
-        "Layout remains readable and usable on mobile and desktop screen sizes.",
-        "Each route/page has a non-empty document title and the app includes a meta description."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/index.html",
-          "operation": "modify",
-          "description": "Add a global meta description suitable for the “Built Rite Creations” marketing site and ensure the base HTML remains configured for accessibility (lang already set to en)."
-        },
-        {
-          "path": "frontend/src/router.tsx",
-          "operation": "create",
-          "description": "Create the client-side routing configuration for all recreated pages/sections from precisionlasernw.com and ensure no broken links from header/footer navigation."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Integrate the router and ensure the layout/header/footer are consistently applied to all public routes."
-        },
-        {
-          "path": "frontend/src/hooks/useDocumentTitle.ts",
-          "operation": "create",
-          "description": "Add a small hook that sets a non-empty document title per route/page and supports a consistent title format for “Built Rite Creations”."
-        },
-        {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Apply per-page document title behavior and ensure semantic structure (landmarks/headings) and responsive layout decisions for mobile/tablet/desktop."
-        },
-        {
-          "path": "frontend/src/pages/ServicesPage.tsx",
-          "operation": "modify",
-          "description": "Apply per-page document title behavior and ensure semantic structure and responsive layout decisions for mobile/tablet/desktop."
-        },
-        {
-          "path": "frontend/src/pages/GalleryPage.tsx",
-          "operation": "modify",
-          "description": "Apply per-page document title behavior and ensure semantic structure and responsive layout decisions for mobile/tablet/desktop."
-        },
-        {
-          "path": "frontend/src/pages/AboutPage.tsx",
-          "operation": "modify",
-          "description": "Apply per-page document title behavior and ensure semantic structure and responsive layout decisions for mobile/tablet/desktop."
-        },
-        {
-          "path": "frontend/src/pages/ContactPage.tsx",
-          "operation": "modify",
-          "description": "Apply per-page document title behavior and ensure semantic structure and responsive layout decisions for mobile/tablet/desktop (including accessible form/contact presentation if present on the source site)."
-        },
-        {
-          "path": "frontend/src/components/SiteHeader.tsx",
-          "operation": "modify",
-          "description": "Ensure the navigation is keyboard accessible, provides clear focus states, and supports a responsive mobile menu; use shadcn-ui primitives as needed for accessible interactions (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "create",
-          "description": "Create global styles that ensure readable typography, accessible focus indicators, and responsive defaults (e.g., base line-height and spacing) for the marketing site."
-        }
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "summary": "Apply a cohesive industrial/craft visual theme for “Built Rite Creations” across header, footer, and all sections (not default template styling).",
-      "acceptanceCriteria": [
-        "Theme is consistent across header, footer, and all sections (typography scale, button styles, and spacing feel unified).",
-        "Color palette and typography clearly communicate an industrial/craft brand aesthetic (not a generic default template look)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Adjust Tailwind theme tokens (colors/typography/spacing extensions) to establish an industrial/craft palette and consistent UI rhythm used throughout the site."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Define global CSS variables and baseline typography to support the chosen “Built Rite Creations” industrial theme and ensure consistent styling across components and sections."
-        },
-        {
-          "path": "frontend/src/components/SiteLayout.tsx",
-          "operation": "modify",
-          "description": "Apply consistent layout spacing, section padding, max-width/container rules, and background treatments so the entire site shares a unified visual system."
-        },
-        {
-          "path": "frontend/src/components/sections/MarketingSectionRenderer.tsx",
-          "operation": "modify",
-          "description": "Standardize section styling (headings, subheadings, body copy, dividers, and cards) to avoid default-looking template styling; use shadcn-ui components where appropriate for cohesive UI elements (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/components/sections/CallToAction.tsx",
-          "operation": "modify",
-          "description": "Ensure primary/secondary CTA styling is consistent across the site and matches the industrial/craft theme; use shadcn-ui button variants if available (verify the component's usage instructions before implementing)."
-        },
-        {
-          "path": "frontend/src/components/SiteHeader.tsx",
-          "operation": "modify",
-          "description": "Align header visual design (logo/wordmark treatment, nav item styling, and responsive menu presentation) with the industrial/craft theme (not default styling)."
+          "description": "Replace businessInfo.phone.display and businessInfo.phone.tel values to use the new phone number \"(781) 227-0994\" and tel digits \"7812270994\" so all consumers update site-wide."
         },
         {
           "path": "frontend/src/components/SiteFooter.tsx",
           "operation": "modify",
-          "description": "Align footer typography, link styling, and background/foreground contrast with the industrial/craft theme and ensure consistency with the header and sections."
+          "description": "Audit and ensure the footer phone link strictly uses businessInfo.phone.display for visible text and businessInfo.phone.tel for the tel: href, and remove/replace any accidental hardcoded references to the old number if present."
+        },
+        {
+          "path": "frontend/src/pages/ContactPage.tsx",
+          "operation": "modify",
+          "description": "Audit and ensure all contact page phone links/text strictly use businessInfo.phone.display for visible text and businessInfo.phone.tel for the tel: href, and remove/replace any accidental hardcoded references to the old number if present."
         }
       ]
     }
