@@ -1,0 +1,16 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with routes for all pages (Home, Services, Gallery, About, Contact) and wraps them in the SiteLayout component.",
+  "frontend/src/components/SiteLayout.tsx": "Layout wrapper component that provides consistent structure with header, main content area using Outlet, and footer across all pages.",
+  "frontend/src/components/SiteHeader.tsx": "Responsive navigation header with Built Rite Creations branding, desktop menu, mobile sheet menu, and \"Get a Quote\" CTA button.",
+  "frontend/src/components/SiteFooter.tsx": "Site footer with contact information, service links, quick navigation, social media icons, and caffeine.ai attribution with heart icon.",
+  "frontend/src/pages/HomePage.tsx": "Home page featuring hero section, mission statement, feature cards highlighting laser cleaning benefits, services preview grid, and call-to-action sections.",
+  "frontend/src/pages/ServicesPage.tsx": "Services page displaying comprehensive grid of all laser cleaning services (rust removal, graffiti removal, historical restoration, etc.) with descriptions and CTAs.",
+  "frontend/src/pages/GalleryPage.tsx": "Gallery page showcasing project portfolio with placeholder cards for various laser cleaning project categories and types.",
+  "frontend/src/pages/AboutPage.tsx": "About page presenting Built Rite Creations' mission, core values (precision, quality, service, innovation), and reasons to choose the company.",
+  "frontend/src/pages/ContactPage.tsx": "Contact page with quote request form, contact information cards (phone, email, hours), and social media links.",
+  "frontend/src/hooks/useDocumentTitle.ts": "Custom React hook that sets page-specific document titles with \"Built Rite Creations\" suffix for proper SEO.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file reserved for future React Query hooks when backend integration is needed.",
+  "frontend/src/index.css": "Global styles with industrial/craft-themed OKLCH color system for light and dark modes, featuring deep charcoal, warm gray, and steel blue palette with typography defaults.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with industrial theme colors, Inter/JetBrains Mono fonts, custom shadows, and design tokens matching the craft aesthetic.",
+  "frontend/index.html": "HTML entry point with SEO meta description for Built Rite Creations laser cleaning services and proper page title."
+}

@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.5rem;
+        
+        /* Industrial/Craft Color Palette - Light Mode */
+        --background: 0.98 0 0;
+        --foreground: 0.15 0.01 240;
+        
+        --card: 1 0 0;
+        --card-foreground: 0.15 0.01 240;
+        
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0.01 240;
+        
+        /* Deep charcoal primary */
+        --primary: 0.25 0.02 240;
+        --primary-foreground: 0.98 0 0;
+        
+        /* Warm gray secondary */
+        --secondary: 0.88 0.01 60;
+        --secondary-foreground: 0.25 0.02 240;
+        
+        --muted: 0.92 0.01 60;
+        --muted-foreground: 0.45 0.02 240;
+        
+        /* Steel blue accent */
+        --accent: 0.55 0.08 240;
+        --accent-foreground: 0.98 0 0;
+        
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0 0;
+        
+        --border: 0.88 0.01 240;
+        --input: 0.88 0.01 240;
+        --ring: 0.55 0.08 240;
+        
+        --chart-1: 0.55 0.15 240;
+        --chart-2: 0.60 0.12 200;
+        --chart-3: 0.50 0.10 280;
+        --chart-4: 0.65 0.14 160;
+        --chart-5: 0.70 0.16 120;
+    }
+
+    .dark {
+        /* Industrial/Craft Color Palette - Dark Mode */
+        --background: 0.12 0.01 240;
+        --foreground: 0.95 0.01 60;
+        
+        --card: 0.18 0.02 240;
+        --card-foreground: 0.95 0.01 60;
+        
+        --popover: 0.15 0.02 240;
+        --popover-foreground: 0.95 0.01 60;
+        
+        /* Warm steel primary */
+        --primary: 0.75 0.05 60;
+        --primary-foreground: 0.12 0.01 240;
+        
+        --secondary: 0.25 0.02 240;
+        --secondary-foreground: 0.95 0.01 60;
+        
+        --muted: 0.22 0.02 240;
+        --muted-foreground: 0.65 0.02 60;
+        
+        /* Bright steel accent */
+        --accent: 0.65 0.10 220;
+        --accent-foreground: 0.12 0.01 240;
+        
+        --destructive: 0.60 0.20 25;
+        --destructive-foreground: 0.95 0.01 60;
+        
+        --border: 0.25 0.02 240;
+        --input: 0.25 0.02 240;
+        --ring: 0.65 0.10 220;
+        
+        --chart-1: 0.60 0.15 220;
+        --chart-2: 0.65 0.12 200;
+        --chart-3: 0.55 0.10 260;
+        --chart-4: 0.70 0.14 180;
+        --chart-5: 0.75 0.16 140;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold tracking-tight;
+    }
+    
+    h1 {
+        @apply text-4xl md:text-5xl lg:text-6xl;
+    }
+    
+    h2 {
+        @apply text-3xl md:text-4xl;
+    }
+    
+    h3 {
+        @apply text-2xl md:text-3xl;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}

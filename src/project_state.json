@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Create a website mirroring the content of precisionlasernw.com, rebranded under the company name \"Built Rite Creations\".",
+  "existing_features": [
+    {
+      "id": "feature-recreate-a-public-marketing-website-whose-page-structure-sections-and-written-content-match-the-current-content-found-on-https-precisionlasernw-com-but-with-the-company-name-changed-everywhere-to-built-rite-creations",
+      "title": "Recreate a public marketing website whose page structure, sections, and written content match the current content found on https://precisionlasernw.com, but with the company name changed everywhere to \"Built Rite Creations\".",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-recreated-site-as-a-responsive-accessible-ui-mobile-tablet-desktop-with-working-navigation-between-pages-sections-and-sensible-seo-defaults-document-titles-per-page-and-a-global-meta-description",
+      "title": "Implement the recreated site as a responsive, accessible UI (mobile/tablet/desktop) with working navigation between pages/sections and sensible SEO defaults (document titles per page and a global meta description).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-visual-theme-colors-typography-spacing-and-component-styling-that-fits-a-construction-woodworking-industrial-craftsmanship-brand-for-built-rite-creations-and-use-it-consistently-across-the-entire-site-avoid-default-looking-template-styling",
+      "title": "Apply a cohesive visual theme (colors, typography, spacing, and component styling) that fits a construction/woodworking/industrial craftsmanship brand for \"Built Rite Creations\" and use it consistently across the entire site (avoid default-looking template styling).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Build a website with the same content as precisionlasernw.com, changing the company name to Built Rite Creations",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "architecturalNotes": [],
+  "knownIssues": [],
+  "isFixRequest": false,
+  "gameProjectType": "none",
+  "projectName": "Built Rite Creations",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0,
+  "requiresBackendChanges": false,
+  "requiresFrontendChanges": true
+}
